@@ -8,6 +8,8 @@ sudo pip install ansible     # others
 ```
 
 ## Usage
+| command | description |
+| :--- | :------- |
 | `vagrant up`      | Deploy/Start       |
 | `vagrant halt`    | Gracefully Stop VM |
 | `vagrant destroy` | Delete VM          |
