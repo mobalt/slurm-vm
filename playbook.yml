@@ -1,9 +1,13 @@
 - name: Slurm all in One
   hosts: slurm
   become: true
-  vars:
-    slurm_roles: ['controller', 'exec', 'dbd']
-  roles:
-    #- galaxyproject.slurm
-    #- ansible-slurm
-    - slurm
+  tasks:
+    - name: Update package cache
+      apt: update_cache=yes force_apt_get=yes cache_valid_time=3600
+    - name: Upgrade all packages
+      apt: upgrade=dist force_apt_get=yes
+    - name: Install all slurm roles
+      include_role:
+        name: slurm
+      vars:
+        slurm_roles: ['controller', 'exec', 'dbd']
