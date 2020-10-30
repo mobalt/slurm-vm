@@ -6,7 +6,6 @@ Vagrant.configure("2") do |config|
   config.vm.box_check_update = false
   config.ssh.insert_key = false
 
-  config.vm.synced_folder ".", "/vagrant", disabled: true
   config.vm.provider :virtualbox do |vb|
     vb.memory = 4096
     vb.linked_clone = true
@@ -14,7 +13,7 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "slurm" do |app|
     app.vm.hostname = "slurm.test"
-    app.vm.network :private_network, ip: "192.168.60.1"
+    app.vm.network :private_network, ip: "192.168.60.60"
   end
 
 
@@ -34,7 +33,7 @@ Vagrant.configure("2") do |config|
   # using a specific IP.
   # config.vm.network "private_network", ip: "192.168.33.10"
 
-  config.vm.provision "ansible" do |ansible|
-    ansible.playbook = "playbook.yml"
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.playbook = "provisioning/playbook.yml"
   end
 end

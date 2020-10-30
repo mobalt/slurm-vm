@@ -1,5 +1,5 @@
 - name: Slurm all in One
-  hosts: slurm
+  hosts: all
   become: true
   tasks:
     - name: Update package cache
