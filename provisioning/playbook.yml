@@ -15,3 +15,36 @@
         name: slurm
       vars:
         slurm_roles: ['controller', 'exec', 'dbd']
+
+    - name: Stop tomcat
+      service:
+        name: tomcat7
+        state: stopped
+    - name: Remove old WAR file
+      file:
+          path: "/var/lib/tomcat7/webapps/{{ item }}"
+          state: absent
+      loop:
+          - ROOT.war
+          - ROOT
+    - name: Download latest WAR
+      get_url:
+          url: "https://ci.xnat.org/job/XNAT%20Web/1745/artifact/build/libs/xnat-web-1.7.7-INTERNAL.war"
+          dest: /var/lib/tomcat7/webapps/ROOT.war
+          owner: xnat
+          group: xnat
+
+    - name: Download the Container Service Plugin
+      get_url:
+          url: "{{ item }}"
+          dest: /data/xnat/home/plugins/
+          owner: xnat
+          group: xnat
+      loop:
+          - "https://bitbucket.org/xnatdev/container-service/downloads/containers-2.1.0-fat.jar"
+          - "https://ci.xnat.org/job/plugins/job/Batch%20Launch%20Plugin/4/artifact/build/libs/batch-launch-plugin-0.4.0-SNAPSHOT.jar"
+    - name: Stop tomcat
+      service:
+        name: tomcat7
+        state: started
+        enabled: yes
