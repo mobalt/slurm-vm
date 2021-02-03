@@ -29,7 +29,7 @@
           - ROOT
     - name: Download latest WAR
       get_url:
-          url: "https://ci.xnat.org/job/XNAT%20Web/1745/artifact/build/libs/xnat-web-1.7.7-INTERNAL.war"
+          url: "https://ci.xnat.org/job/XNAT%20Web/lastSuccessfulBuild/artifact/build/libs/web-1.8.0-SNAPSHOT.jar"
           dest: /var/lib/tomcat7/webapps/ROOT.war
           owner: xnat
           group: xnat
@@ -41,9 +41,9 @@
           owner: xnat
           group: xnat
       loop:
-          - "https://bitbucket.org/xnatdev/container-service/downloads/containers-2.1.0-fat.jar"
+          - "https://ci.xnat.org/job/plugins/job/container-service/job/dev/lastSuccessfulBuild/artifact/build/libs/container-service-3.0.0-SNAPSHOT-fat.jar"
           - "https://ci.xnat.org/job/plugins/job/Batch%20Launch%20Plugin/4/artifact/build/libs/batch-launch-plugin-0.4.0-SNAPSHOT.jar"
-    - name: Stop tomcat
+    - name: Start tomcat
       service:
         name: tomcat7
         state: started
