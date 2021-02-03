@@ -29,7 +29,7 @@
           - ROOT
     - name: Download latest WAR
       get_url:
-          url: "https://ci.xnat.org/job/XNAT%20Web/lastSuccessfulBuild/artifact/build/libs/web-1.8.0-SNAPSHOT.jar"
+          url: "https://ci.xnat.org/job/XNAT%20Web/lastSuccessfulBuild/artifact/build/libs/xnat-web-1.8.0-SNAPSHOT.war"
           dest: /var/lib/tomcat7/webapps/ROOT.war
           owner: xnat
           group: xnat
